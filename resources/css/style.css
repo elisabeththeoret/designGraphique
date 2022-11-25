@@ -1,0 +1,370 @@
+/* Base graphique 
+ -------------------------------- */
+
+/* Variables */
+html {
+    --font_titre: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --blue: #6495ed;
+    --orange: #ff7f50;
+    --white: #ffffff;
+    --grey: #4e4e4e;
+    --lightgrey: #858585;
+    --black: #272727;
+    --darker: #202020;
+}
+
+/* Base héritée */
+html {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* Tout */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body */
+body {
+    height: 100vh;
+    color: var(--white);
+    background-color: var(--black);
+}
+
+
+/* Conteneurs génériques 
+ -------------------------------- */
+
+/* Contexte flex */
+main,
+form,
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+}
+
+section.flex-row {
+    flex-wrap: wrap;
+}
+
+.flex-row>* {
+    flex: 1;
+}
+
+/* Principal */
+main {
+    padding: 40px;
+    gap: 80px;
+}
+
+
+/* Éléments génériques 
+ -------------------------------- */
+
+/* Titres */
+h1, h2 {
+    font-family: var(--font_titre);
+}
+
+h1 {
+    font-size: 2.25em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--blue);
+}
+
+h2 {
+    font-size: 1.25em;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+
+/* Petit texte */
+small {
+    color: var(--lightgrey);
+    font-family: var(--font_titre);
+}
+
+/* Paragraphe */
+p {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Liens */
+a {
+    max-width: max-content;
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--orange);
+    transition: 300ms ease-in-out;
+}
+
+/* Boutons */
+.bouton {
+    max-width: max-content;
+    padding: 15px 20px;
+    background-color: inherit;
+    border: 1px solid var(--blue);
+}
+
+.bouton:hover {
+    color: var(--white);
+    background-color: var(--orange);
+    border-color: var(--orange);
+    border-radius: 20vh;
+    transition: 300ms ease-in-out;
+}
+
+
+/* Conteneur spécifique : Navigation 
+ -------------------------------- */
+.accueil {
+    height: 100%;
+    padding: 0px 40px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.accueil>* {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.accueil .nav {
+    flex: 65%;
+}
+
+.accueil .boutons {
+    flex: 35%;
+}
+
+.accueil>*>* {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 75px;
+    max-width: unset;
+    flex: 1;
+    font-size: 2.25rem;
+}
+
+.accueil .nav a {
+    border: 1px solid var(--blue);
+}
+
+.accueil .nav a:hover {
+    border: 1px solid var(--orange);
+}
+
+.accueil .boutons a {
+    font-size: 1.25rem;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+.accueil .boutons a:hover {
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.accueil .fleche {
+    position: absolute;
+    color: inherit;
+    margin-left: calc(100% - 200px);
+    opacity: 0;
+    transition: ease-in-out 300ms;
+}
+
+.accueil a:hover .fleche {
+    margin-left: calc(100% - 170px);
+    opacity: 1;
+}
+
+.accueil .nav a:hover .fleche {
+    color: var(--orange);
+}
+
+.accueil .boutons a:hover .fleche {
+    color: var(--white);
+}
+
+
+/* Conteneur spécifique : Navigation 
+ -------------------------------- */
+
+.nav-principale,
+.boutons-action {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: var(--darker);
+}
+
+.nav-principale {
+    gap: 40px;
+    padding: 0px 40px;
+}
+
+/* Liens de la navigation */
+.nav-principale a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    background-color: inherit;
+    box-sizing: border-box;
+    border-bottom: 2px solid var(--darker);
+}
+
+.nav-principale a:hover {
+    border-color: var(--orange);
+}
+
+/* Sous-conteneur spécifique : Boutons-action */
+.boutons-action {
+    margin-left: auto;
+    gap: 20px;
+}
+
+.boutons-action a {
+    border: none;
+    border-bottom: 2px solid var(--orange);
+}
+
+.boutons-action a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+
+/* Conteneur spécifique : Carte 
+ -------------------------------- */
+
+/* Section contenant les cartes */
+.section-cartes {
+    flex-wrap: wrap;
+    gap: 60px 20px;
+}
+
+/* Carte */
+.carte {
+    gap: 20px;
+    padding: 30px;
+    border-left: 1px solid var(--grey);
+}
+
+.carte>.flex-row {
+    gap: 20px;
+}
+
+/* Nom de l'entreprise */
+.carte a {
+    font-size: 1.625em;
+}
+
+
+/* Conteneur spécifique : Nav Action 
+ -------------------------------- */
+header.flex-row>nav {
+    flex: unset;
+}
+
+
+/* Conteneur spécifique : Nav Action 
+ -------------------------------- */
+
+.nav-action {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+/* Conteneur spécifique : Form 
+ -------------------------------- */
+
+form>.flex-row {
+    flex-wrap: wrap;
+}
+
+form fieldset.flex-col {
+    flex: 1;
+    min-width: 400px;
+    gap: 20px;
+    border: none;
+}
+
+/* Labels */
+label {
+    color: var(--lightgrey);
+    font-family: var(--font_titre);
+    font-size: smaller;
+    margin-top: 20px;
+}
+
+/* Inputs */
+input, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+input, select {
+    display: block;
+    padding: 10px 15px;
+    background-color: #202020;
+    border: none;
+    border-left: 5px solid coral;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: cornflowerblue;
+}
+
+select * {
+    outline: none;
+    border-left: 3px solid coral;
+}
+
+/* Bouton */
+input.bouton {
+    color: var(--blue);
+    cursor: pointer;
+}
+
+/* Bouton annuler,
+   Bouton supprimer */
+.annuler,
+.bouton.supprimer {
+    color: var(--lightgrey);
+    border-color: var(--grey);
+}
+
+.annuler:hover {
+    background-color: var(--black);
+    border-color: var(--grey);
+}
+
+.supprimer:hover {
+    color: var(--white);
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
