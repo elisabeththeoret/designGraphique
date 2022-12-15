@@ -5,7 +5,7 @@
         /**
          * requireModel
          * Lier un fichier 
-         * @param {String} $model - Nom du modèle de la page
+         * @param { String } $model - Nom du modèle de la page
          */
         static function requireModel($model){
             return require_once("models/$model.php");

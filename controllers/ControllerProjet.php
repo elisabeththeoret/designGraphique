@@ -15,10 +15,9 @@
         public function index(){
             $projet = new ModelProjet();
             $selectProjets = $projet->select();
-
+            
             twig::render("projet-index.php", ['projets' => $selectProjets]);
         }
 
     }
 ?>
-

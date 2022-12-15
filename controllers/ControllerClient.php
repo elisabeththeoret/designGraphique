@@ -15,19 +15,19 @@
         public function index(){
             $client = new ModelClient();
             $selectClients = $client->selectClients('nom');
-
+            
             twig::render("client-index.php", ['clients' => $selectClients]);
         }
 
         /**
          * show
          * Afficher les données du client.
-         * @param {Int} $id - Clé primaire du client à afficher
+         * @param { Int } $id - Clé primaire du client à afficher
          */
         public function show($id){
             $client = new ModelClient();
             $selectClient = $client->selectClientId($id);
-
+            
             twig::render("client-show.php", ['client' => $selectClient]);
         }
 
@@ -38,7 +38,7 @@
         public function create(){
             $ville = new ModelVille();
             $selectVilles = $ville->select();
-
+            
             twig::render('client-create.php', ['villes' => $selectVilles]);
         }
 
@@ -49,48 +49,47 @@
         public function store(){
             $client = new ModelClient();
             $insert = $client->insert($_POST);
-
+            
             requirePage::redirectPage('/client/show/'.$insert);
         }
 
         /**
          * edit
          * Afficher les données d'un client dans un formulaire pour les modifier.
-         * @param {Int} $id - Clé primaire du client à afficher
+         * @param { Int } $id - Clé primaire du client à afficher
          */
         public function edit($id){
             $client = new ModelClient();
-            $selectClient = $client->selectClientId($id);
-
+            $selectClient = $client->selectId($id);
+            
             $ville = new ModelVille();
             $selectVilles = $ville->select();
-
+            
             twig::render('client-edit.php', ['client' => $selectClient, 'villes' => $selectVilles]);
         }
 
         /**
          * update
          * Mettre à jour les données d'un client.
-         * @param {Int} $id - Clé primaire du client à modifier
+         * @param { Int } $id - Clé primaire du client à modifier
          */
         public function update(){
             $client = new ModelClient();
             $update = $client->update($_POST);
-
-            requirePage::redirectPage('/client/show/'.$_POST['client_id']);
+            
+            requirePage::redirectPage('/client/show/'.$_POST['id']);
         }
 
         /**
          * delete
          * Supprimer un client.
-         * @param {Int} $id - Clé primaire du client à supprimer
+         * @param { Int } $id - Clé primaire du client à supprimer
          */
         public function delete(){
             $client = new ModelClient();
-            $delete = $client->delete($_POST['client_id']);
-
+            $delete = $client->delete($_POST['id']);
+            
             requirePage::redirectPage('/client');
         }
     }
 ?>
-
