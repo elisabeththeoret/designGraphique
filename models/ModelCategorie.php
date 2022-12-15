@@ -13,7 +13,7 @@
         protected $primaryKey = "id";
         
         protected $fillable = ["id", "nom", "description"];
-        protected $render = "categorie.id, categorie.nom, categorie.description, service";
+        protected $render = "categorie.id, categorie.nom, categorie.description";
 
     }
 ?>
