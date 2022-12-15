@@ -17,7 +17,7 @@
 
         /**
          * select
-         * Récupérer toutes les données de la table reçue
+         * Récupérer toutes les données de la table projet, incluant le client et la catégorie. 
          * @param { String } $col - Nom de la colonne par laquelle le tri s'effectue
          * @param { String } $ordre - Ordre ascendant ('ASC') ou descendant ('DESC')
          * @return { Array } - Toutes les données
@@ -38,7 +38,7 @@
 
         /**
          * selectId
-         * Récupérer les données par id de la table reçue
+         * Récupérer les données par id de la table projet, incluant le client et la catégorie. 
          * @param { Int } $id - Id du projet à afficher
          * @param { String } $url - Chemin où rediriger en cas d'erreur
          * @return { Array | redirect } 

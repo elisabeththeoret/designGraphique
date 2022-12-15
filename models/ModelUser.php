@@ -7,7 +7,6 @@
          * @protected { String } $primaryKey - Clé primaire de la table
          * 
          * @protected { Array } $fillable - Tableau des colonnes de la db
-         * @protected { String } $render - Ce qui est retourné dans le tableau à afficher
          */
         protected $table = "user";
         protected $primaryKey = "id";

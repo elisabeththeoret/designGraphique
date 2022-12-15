@@ -17,14 +17,14 @@
 
         /**
          * select
-         * Récupérer toutes les données de la table reçue
+         * Récupérer toutes les données de la table client, incluant la ville.
          * @param { String } $col - Nom de la colonne par laquelle le tri s'effectue
          * @param { String } $ordre - Ordre ascendant ('ASC') ou descendant ('DESC')
          * @return { Array } - Toutes les données
          */
         public function selectClients($col='id', $ordre='ASC', $url='/home/error'){
             // requête
-            $sql = "SELECT $this->render FROM $this->table INNER JOIN `ville` ON ($this->table.`ville_id` = `ville`.`id`) ORDER BY $col $ordre;";
+            $sql = "SELECT $this->render FROM $this->table INNER JOIN ville ON ($this->table.ville_id = ville.id) ORDER BY $col $ordre;";
             $stmt = $this->query($sql);
             
             if(!$stmt){
@@ -38,14 +38,14 @@
 
         /**
          * selectId
-         * Récupérer les données par id de la table reçue
+         * Récupérer les données par id de la table client, incluant la ville.
          * @param { Int } $id - Id du client à afficher
          * @param { String } $url - Chemin où rediriger en cas d'erreur
-         * @return { Array | redirect } 
+         * @return { Array | redirect }
          */
         public function selectClientId($id, $url='/home/error'){
             // requête
-            $sql = "SELECT $this->render FROM $this->table INNER JOIN `ville` ON ($this->table.`ville_id` = `ville`.`id`) WHERE $this->table.$this->primaryKey = :$this->primaryKey;";
+            $sql = "SELECT $this->render FROM $this->table INNER JOIN ville ON ($this->table.ville_id = ville.id) WHERE $this->table.$this->primaryKey = :$this->primaryKey;";
             $stmt = $this->prepare($sql);
             $stmt->bindValue(":$this->primaryKey", $id);
             $stmt->execute();
