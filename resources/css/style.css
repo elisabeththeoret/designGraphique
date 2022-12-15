@@ -256,7 +256,8 @@ a:hover {
 
 /* Section contenant les cartes */
 .section-cartes {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     gap: 60px 20px;
 }
 
