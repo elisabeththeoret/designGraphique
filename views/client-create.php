@@ -5,6 +5,11 @@
     <main>
         <h1>S'inscrire</h1>
         
+        <!-- Erreurs -->
+        {% if errors %}
+        <span class="errors">{{ errors | raw }}</span>
+        {% endif %}
+        
         <!-- Form Créer -->
         <form action="{{ path }}/client/store" method="post">
             <div class="flex-row">
@@ -17,8 +22,8 @@
                     <label for="adresse">Adresse</label>
                     <input type="text" name="adresse" id="adresse">
                     
-                    <label for="ville_id">Ville</label>
-                    <select name="ville_id" id="ville_id">
+                    <label for="ville">Ville</label>
+                    <select name="ville_id" id="ville">
                         {% for ville in villes %}
                         <option value="{{ ville.id }}">{{ ville.nom }}</option>
                         {% endfor %}

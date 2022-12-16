@@ -1,8 +1,13 @@
 <?php
+    // session
+    session_start();
+
     // fichiers
     require_once __DIR__.'/library/RequirePage.php';
     require_once __DIR__.'/vendor/autoload.php';
     require_once __DIR__.'/library/Twig.php';
+    require_once __DIR__.'/library/Validation.php';
+    require_once __DIR__.'/library/CheckSession.php';
 
     // récupérer le chemin
     $url = isset($_GET['url']) ? explode('/', ltrim($_GET['url'], '/')) : '/';
