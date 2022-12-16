@@ -1,6 +1,7 @@
 <?php
     // class ModelProjet
     class ModelProjet extends CRUD{
+
         /**
          * propriétés
          * @protected { String } $table - Nom de la table db

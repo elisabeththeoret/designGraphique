@@ -19,14 +19,14 @@
                     <label for="client_id">Client</label>
                     <select name="client_id" id="client_id">
                         {% for client in clients %}
-                        <option value="{{ client.id }}" {% if client.id == projet.client_id %}selected{% endif %}>{{ client.nom }}</option>
+                        <option value="{{ client.id }}" {% if client.id == projet.client_id %} selected {% endif %}>{{ client.nom }}</option>
                         {% endfor %}
                     </select>
                     
                     <label for="categorie_id">Catégorie</label>
                     <select name="categorie_id" id="categorie_id">
                         {% for categorie in categories %}
-                        <option value="{{ categorie.id }}" {% if categorie.id == projet.categorie_id %}selected{% endif %}>{{ categorie.nom }}</option>
+                        <option value="{{ categorie.id }}" {% if categorie.id == projet.categorie_id %} selected {% endif %}>{{ categorie.nom }}</option>
                         {% endfor %}
                     </select>
 

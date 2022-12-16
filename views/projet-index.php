@@ -3,7 +3,15 @@
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>Nos projets</h1>
+        <header class="flex-row">
+            <h1>Nos projets</h1>
+            
+            {% if session and session.privilege_id <= 2 %}
+            <nav class="nav-action">
+                <a class="bouton" href="{{ path }}/projet/create">Ajouter</a>
+            </nav>
+            {% endif %}
+        </header>
         
         <!-- Liste -->
         <section class="grille">

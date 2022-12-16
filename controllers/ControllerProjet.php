@@ -22,7 +22,8 @@
 
         /**
          * show
-         * Afficher les données du projet.
+         * Déclarer les variables qu'on veut accessible dans la page.
+         * Afficher la page de détails d'un projet.
          * @param { Int } $id - Clé primaire du projet à afficher
          */
         public function show($id){
@@ -34,32 +35,75 @@
 
         /**
          * create
-         * Afficher la page pour créer un projet.
+         * Afficher la page pour créer un nouveau projet.
+         * Seul les utilisateurs 'Admin' et 'Employé.e' peuvent créer un nouveau projet.
          */
         public function create(){
+            CheckSession::sessionAuth();
+            
+            // admin ou employé.e
+            if($_SESSION['privilege_id'] <= 2){
+                $client = new ModelClient();
+                $selectClients = $client->select();
+                
+                $categorie = new ModelCategorie();
+                $selectCategories = $categorie->select();
+                
+                twig::render('projet-create.php', ['clients' => $selectClients, 'categories' => $selectCategories]);
+            }
+            // client
+            else{
+                RequirePage::redirectPage('/home/error');
+            }
+        }
+
+        /**
+         * store
+         * Valider les données reçues.
+         * Enregistrer un nouveau projet.
+         * Seul les utilisateurs 'Admin' et 'Employé.e' peuvent créer un nouveau projet.
+         */
+        public function store(){
+            CheckSession::sessionAuth();
+            
+            // client
+            if($_SESSION['privilege_id'] == 3){
+                RequirePage::redirectPage('/home/error');
+            }
+            
+            // valider
+            $validation = new Validation();
+            extract($_POST);
+            $validation->name('titre')->value($titre)->customPattern('text')->required()->max(40);
+            $validation->name('description')->value($description)->pattern('text');
+            $validation->name('client_id')->value($client_id)->pattern('int')->required();
+            $validation->name('categorie_id')->value($categorie_id)->pattern('int')->required();
+            
+            // vérifier
+            if($validation->isSuccess()){
+                $projet = new ModelProjet();
+                $insert = $projet->insert($_POST);
+                
+                requirePage::redirectPage('/projet/show/'.$insert);
+            } else{
+                // erreurs
+                $errors = $validation->displayErrors();
+            }
+            
+            // réafficher avec erreurs
             $client = new ModelClient();
             $selectClients = $client->select();
             
             $categorie = new ModelCategorie();
             $selectCategories = $categorie->select();
             
-            twig::render('projet-create.php', ['clients' => $selectClients, 'categories' => $selectCategories]);
-        }
-
-        /**
-         * store
-         * Enregistrer un nouveau projet.
-         */
-        public function store(){
-            $projet = new ModelProjet();
-            $insert = $projet->insert($_POST);
-            
-            requirePage::redirectPage('/projet/show/'.$insert);
+            twig::render('projet-create.php', ['errors' => $errors, 'projet' => $_POST, 'clients' => $selectClients, 'categories' => $selectCategories]);
         }
 
         /**
          * edit
          * Afficher les données d'un projet dans un formulaire pour les modifier.
+         * Seul les utilisateurs 'Admin' et 'Employé.e' peuvent modifier un projet.
          * @param { Int } $id - Clé primaire du projet à afficher
          */
         public function edit($id){
@@ -77,14 +121,46 @@
 
         /**
          * update
+         * Valider les données reçues.
          * Mettre à jour les données d'un projet.
+         * Seul les utilisateurs 'Admin' et 'Employé.e' peuvent modifier un projet.
          * @param { Int } $id - Clé primaire du projet à modifier
          */
         public function update(){
-            $projet = new ModelClient();
-            $update = $projet->update($_POST);
+            CheckSession::sessionAuth();
             
-            requirePage::redirectPage('/projet/show/'.$_POST['id']);
+            // client
+            if($_SESSION['privilege_id'] == 3){
+                RequirePage::redirectPage('/home/error');
+            }
+            
+            // valider
+            $validation = new Validation();
+            extract($_POST);
+            $validation->name('titre')->value($titre)->customPattern('text')->required()->max(40);
+            $validation->name('description')->value($description)->pattern('text');
+            $validation->name('client_id')->value($client_id)->pattern('int')->required();
+            $validation->name('categorie_id')->value($categorie_id)->pattern('int')->required();
+            
+            // vérifier
+            if($validation->isSuccess()){
+                $projet = new ModelProjet();
+                $update = $projet->update($_POST);
+                
+                requirePage::redirectPage('/projet/show/'.$_POST['id']);
+            } else{
+                // erreurs
+                $errors = $validation->displayErrors();
+            }
+            
+            // réafficher avec erreurs
+            $client = new ModelClient();
+            $selectClients = $client->select();
+            
+            $categorie = new ModelCategorie();
+            $selectCategories = $categorie->select();
+            
+            twig::render('projet-create.php', ['errors' => $errors, 'projet' => $_POST, 'clients' => $selectClients, 'categories' => $selectCategories]);
         }
 
     }
