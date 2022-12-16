@@ -1,9 +1,9 @@
-{{ include('header.php', {title: 'Ajouter un client'}) }}
+{{ include('header.php', {title: 'Nouveau client'}) }}
 <body>
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>S'inscrire</h1>
+        <h1>Nouveau client</h1>
         
         <!-- Erreurs -->
         {% if errors %}
@@ -20,30 +20,30 @@
                     <input type="text" name="nom" id="nom" value="{{ client.nom }}">
                     
                     <label for="adresse">Adresse</label>
-                    <input type="text" name="adresse" id="adresse">
+                    <input type="text" name="adresse" id="adresse" value="{{ client.adresse }}">
                     
                     <label for="ville">Ville</label>
                     <select name="ville_id" id="ville">
                         {% for ville in villes %}
-                        <option value="{{ ville.id }}">{{ ville.nom }}</option>
+                        <option value="{{ ville.id }}" {% if ville.id == client.ville_id %} selected {% endif %}>{{ ville.nom }}</option>
                         {% endfor %}
                     </select>
                     
                     <label for="codePostal">Code postal</label>
-                    <input type="text" name="codePostal" id="codePostal">
+                    <input type="text" name="codePostal" id="codePostal" value="{{ client.codePostal }}">
                 </fieldset>
                 
                 <fieldset class="flex-col">
                     <legend><h2>Personne contact</h2></legend>
                     
                     <label for="contact">Contact*</label>
-                    <input type="text" name="contact" id="contact">
+                    <input type="text" name="contact" id="contact" value="{{ client.contact }}">
                     
                     <label for="courriel">Courriel*</label>
-                    <input type="email" name="courriel" id="courriel">
+                    <input type="email" name="courriel" id="courriel" value="{{ client.courriel }}">
                     
                     <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="phone">
+                    <input type="text" name="phone" id="phone" value="{{ client.phone }}">
                 </fieldset>
             </div>
             

@@ -27,7 +27,7 @@
                     <label for="ville">Ville</label>
                     <select name="ville_id" id="ville">
                         {% for ville in villes %}
-                        <option value="{{ ville.id }}" {% if ville.id == client.ville_id %}selected{% endif %}>{{ ville.nom }}</option>
+                        <option value="{{ ville.id }}" {% if ville.id == client.ville_id %} selected {% endif %}>{{ ville.nom }}</option>
                         {% endfor %}
                     </select>
                     
