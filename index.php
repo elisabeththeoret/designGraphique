@@ -33,22 +33,22 @@
                 // récupérer la méthode
                 $method = $url[1];
                 
-                if(isset($url[2])){
-                    // afficher la page avec sa valeur
-                    $value = $url[2];
-                    echo $controller->$method($value);
-                }
-                else{
-                    if(method_exists($controller, $method)){
+                if(method_exists($controller, $method)){
+                    if(isset($url[2])){
+                        // afficher la page avec sa valeur
+                        $value = $url[2];
+                        echo $controller->$method($value);
+                    }
+                    else{
                         // afficher la page
                         echo $controller->$method();
                     }
-                    else{
-                        // page d'erreur (home-error)
-                        require_once('controllers/ControllerHome.php');
-                        $controller = new ControllerHome();
-                        echo $controller->error();
-                    }
+                }
+                else{
+                    // page d'erreur (home-error)
+                    require_once('controllers/ControllerHome.php');
+                    $controller = new ControllerHome();
+                    echo $controller->error();
                 }
             } else{
                 // page controller-index (par défaut)
