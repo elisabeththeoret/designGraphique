@@ -13,7 +13,7 @@
         protected $primaryKey = "id";
         
         protected $fillable = ["id", "titre", "client_id", "categorie_id", "description"];
-        protected $render = "projet.id, projet.titre, projet.description, client.id AS client_id, client.nom AS client_nom, categorie.nom AS categorie_nom";
+        protected $render = ["projet.id", "projet.titre", "projet.description", "client.id AS client_id", "client.nom AS client_nom", "categorie.nom AS categorie_nom"];
 
         /**
          * select
@@ -23,8 +23,13 @@
          * @return { Array } - Toutes les données
          */
         public function selectProjets($col='id', $ordre='ASC', $url='/home/error'){
+            // clés des données
+            $data_keys = array_fill_keys($this->render, '');
+            // données
+            $nomChamps = implode(", ", array_keys($data_keys));
+            
             // reqête
-            $sql = "SELECT $this->render FROM $this->table INNER JOIN client ON ($this->table.client_id = client.id) INNER JOIN categorie ON ($this->table.categorie_id = categorie.id) ORDER BY $this->table.$col $ordre;";
+            $sql = "SELECT $nomChamps FROM $this->table INNER JOIN client ON (projet.client_id = client.id) INNER JOIN categorie ON (projet.categorie_id = categorie.id) ORDER BY $this->table.$col $ordre;";
             $stmt = $this->query($sql);
             
             if(!$stmt){
@@ -44,8 +49,13 @@
          * @return { Array | redirect } 
          */
         public function selectProjetId($id, $url='/home/error'){
+            // clés des données
+            $data_keys = array_fill_keys($this->render, '');
+            // données
+            $nomChamps = implode(", ", array_keys($data_keys));
+            
             // requête
-            $sql = "SELECT $this->render FROM $this->table INNER JOIN client ON ($this->table.client_id = client.id) INNER JOIN categorie ON ($this->table.categorie_id = categorie.id) WHERE $this->table.$this->primaryKey = :$this->primaryKey;";
+            $sql = "SELECT $nomChamps FROM $this->table INNER JOIN client ON (projet.client_id = client.id) INNER JOIN categorie ON (projet.categorie_id = categorie.id) WHERE $this->table.$this->primaryKey = :$this->primaryKey;";
             $stmt = $this->prepare($sql);
             $stmt->bindValue(":$this->primaryKey", $id);
             $stmt->execute();

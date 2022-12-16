@@ -13,7 +13,7 @@
         protected $primaryKey = "id";
         
         protected $fillable = ["id", "nom", "adresse", "ville_id", "codePostal", "contact", "courriel", "phone"];
-        protected $render = "client.id, client.nom, client.adresse, ville.nom AS ville, client.codePostal, client.contact, client.courriel, client.phone";
+        protected $render = ["client.id", "client.nom", "client.adresse", "ville.nom AS ville_nom", "client.codePostal", "client.contact", "client.courriel", "client.phone"];
 
         /**
          * select
@@ -23,8 +23,13 @@
          * @return { Array } - Toutes les données
          */
         public function selectClients($col='id', $ordre='ASC', $url='/home/error'){
+            // clés des données
+            $data_keys = array_fill_keys($this->render, '');
+            // données
+            $nomChamps = implode(", ", array_keys($data_keys));
+            
             // requête
-            $sql = "SELECT $this->render FROM $this->table INNER JOIN ville ON ($this->table.ville_id = ville.id) ORDER BY $col $ordre;";
+            $sql = "SELECT $nomChamps FROM $this->table INNER JOIN ville ON (client.ville_id = ville.id) ORDER BY $col $ordre;";
             $stmt = $this->query($sql);
             
             if(!$stmt){
@@ -44,8 +49,13 @@
          * @return { Array | redirect }
          */
         public function selectClientId($id, $url='/home/error'){
+            // clés des données
+            $data_keys = array_fill_keys($this->render, '');
+            // données
+            $nomChamps = implode(", ", array_keys($data_keys));
+            
             // requête
-            $sql = "SELECT $this->render FROM $this->table INNER JOIN ville ON ($this->table.ville_id = ville.id) WHERE $this->table.$this->primaryKey = :$this->primaryKey;";
+            $sql = "SELECT $nomChamps FROM $this->table INNER JOIN ville ON (client.ville_id = ville.id) WHERE $this->table.$this->primaryKey = :$this->primaryKey;";
             $stmt = $this->prepare($sql);
             $stmt->bindValue(":$this->primaryKey", $id);
             $stmt->execute();

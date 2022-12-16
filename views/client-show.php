@@ -9,12 +9,6 @@
             <nav class="nav-action">
                 <!-- Modifier -->
                 <a class="bouton" href="{{ path }}/client/edit/{{ client.id }}">Modifier</a>
-                
-                <!-- Supprimer -->
-                <form action="{{ path }}/client/delete" method="post">
-                    <input type="hidden" name="id" value="{{ client.id }}">
-                    <input class="bouton supprimer" type="submit" value="Supprimer">
-                </form>
             </nav>
         </header>
         
@@ -28,7 +22,7 @@
                     <p>{{ client.adresse }}</p>
                     
                     <small>Ville : </small>
-                    <p>{{ client.ville }}</p>
+                    <p>{{ client.ville_nom }}</p>
                     
                     <small>Code postal : </small>
                     <p>{{ client.codePostal }}</p>

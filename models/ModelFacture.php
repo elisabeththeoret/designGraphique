@@ -13,6 +13,6 @@
         protected $primaryKey = "id";
         
         protected $fillable = ["id", "date", "projet_id"];
-        protected $render = "facture.id, facture.date, projet.nom AS projet, categorie.nom AS categorie";
+        protected $render = ["facture.id", "facture.date", "projet.nom AS projet", "categorie.nom AS categorie"];
     }
 ?>

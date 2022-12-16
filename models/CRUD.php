@@ -17,12 +17,7 @@
          * @param { String } $ordre - Ordre ascendant ('ASC') ou descendant ('DESC')
          * @return { Array } - Toutes les données
          */
-        public function select($col='', $ordre='ASC', $url='/home/error'){
-            // paramètres
-            if($col == ""){
-                $col = $this->primaryKey;
-            }
-            
+        public function select($col='id', $ordre='ASC', $url='/home/error'){
             // requête
             $sql = "SELECT * FROM $this->table ORDER BY $col $ordre;";
             $stmt = $this->query($sql);
