@@ -3,7 +3,14 @@
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>Utilisateurs</h1>
+        <header class="flex-row">
+            <h1>Utilisateurs</h1>
+            
+            <nav class="nav-action">
+                <!-- Ajouter -->
+                <a class="bouton" href="{{ path }}/user/create">Ajouter</a>
+            </nav>
+        </header>
         
         <!-- Liste -->
         <section class="grille">

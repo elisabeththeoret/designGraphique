@@ -5,6 +5,11 @@
     <main>
         <h1>Se connecter</h1>
         
+        <!-- Erreurs -->
+        {% if errors %}
+        <span class="errors">{{ errors | raw }}</span>
+        {% endif %}
+        
         <!-- Form Créer -->
         <form action="{{ path }}/user/auth" method="post">
             <div class="flex-row">

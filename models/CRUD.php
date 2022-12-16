@@ -37,7 +37,7 @@
          * Récupérer les données par id de la table reçue
          * @param {Int} $id
          * @param {String} $url
-         * @return {}
+         * @return { Array }
          */
         public function selectId($id, $url='/home/error'){
             // requête

@@ -12,14 +12,15 @@
         protected $primaryKey = "id";
         
         protected $fillable = ["id", "nom", "username", "password", "privilege_id"];
-        protected $render = ["user.id", "user.nom", "user.username", "user.password", "user.privilege_id", "privilege.nom AS privilege_nom"];
+        protected $render = ["user.id", "user.nom", "user.username", "user.privilege_id", "privilege.nom AS privilege_nom"];
 
         /**
          * checkUser
-         * Vérifier la connexion du user.
+         * Vérifier la connexion de l'utilisateur.
          * @param { Array } $data - Données de connexion 
+         * @return { String } 
          */
-        public function checkUser($data){
+        public function checkUser($data, $return=false){
             // récupérer les données
             extract($data);
             
@@ -40,17 +41,21 @@
                     session_regenerate_id();
                     $_SESSION['user_id'] = $user_info['id'];
                     $_SESSION['user_nom'] = $user_info['nom'];
+                    $_SESSION['user_username'] = $user_info['username'];
                     $_SESSION['privilege_id'] = $user_info['privilege_id'];
                     $_SESSION['fingerPrint'] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
                     
-                    // rediriger
-                    requirePage::redirectPage('/user/page');
+                    if(!$return){
+                        requirePage::redirectPage('/user/page');
+                    } else{
+                        return 1;
+                    }
                 } else{
-                    // retourner un message d'erreur de password
+                    // erreur de password
                     return "Le mot de passe est incorrect";
                 }
             } else{
-                // retourner un message d'erreur de username
+                // erreur de username
                 return "Le username est incorrect";
             }
         }
@@ -108,6 +113,39 @@
             } else{
                 // rediriger
                 requirePage::redirectPage($url);
+            }
+        }
+
+        /**
+         * usernameExists
+         * Vérifier si le username est déjà existant.
+         * Si oui, comparer les identifiants pour savoir si le username est le même que l'utilisateur reçu. (update)
+         * @param { String } $username 
+         * @param { Int } $id - Id à comparer quand on update
+         * @return { Bool } 
+         */
+        public function usernameExists($username, $id=null){
+            // requête
+            $sql = "SELECT $this->table.$this->primaryKey FROM $this->table WHERE $this->table.username = ?;";
+            $stmt = $this->prepare($sql);
+            $stmt->execute(array($username));
+            
+            // vérifier et retourner
+            $count = $stmt->rowCount();
+            if($count == 1){
+                if($id == null){
+                    return true;
+                } else{
+                    $user = $stmt->fetch();
+                    
+                    if($id == $user['id']){
+                        return false;
+                    } else{
+                        return true;
+                    }
+                }
+            } else{
+                return false;
             }
         }
 

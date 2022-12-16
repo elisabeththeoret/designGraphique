@@ -5,9 +5,9 @@
     <main>
         <header class="flex-row">
             <h1>Bonjour {{ session.user_nom }}!</h1>
-
+            
             <nav class="nav-action">
-                <!-- Modifier -->
+                <!-- Déconnexion -->
                 <a class="bouton" href="{{ path }}/user/logout">Déconnexion</a>
             </nav>
         </header>
@@ -71,7 +71,7 @@
                         <p>{{ user.privilege_nom }}</p>
                     </div>
                 </article>
-
+                
                 <nav class="nav-action">
                     <!-- Modifier -->
                     <a href="{{ path }}/user/edit/{{ session.user_id }}" class="bouton">Modifier</a>
