@@ -6,7 +6,7 @@
         <h1>Nos clients</h1>
         
         <!-- Liste -->
-        <section class="section-cartes">
+        <section class="grille">
             {% for client in clients %}
             <article class="flex-col carte">
                 <a href="{{ path }}/client/show/{{ client.id }}">{{ client.nom }}</a>
@@ -18,7 +18,7 @@
                         <p>{{ client.adresse }}</p>
                         
                         <small>Ville</small>
-                        <p>{{ client.ville }}</p>
+                        <p>{{ client.ville_nom }}</p>
                         
                         <small>Code Postal</small>
                         <p>{{ client.codePostal }}</p>

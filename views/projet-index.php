@@ -6,7 +6,7 @@
         <h1>Nos projets</h1>
         
         <!-- Liste -->
-        <section class="section-cartes">
+        <section class="grille">
             {% for projet in projets %}
             <article class="flex-col carte">
                 <a href="{{ path }}/projet/show/{{ projet.id }}">{{ projet.titre }}</a>

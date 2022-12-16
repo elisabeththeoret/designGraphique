@@ -66,6 +66,13 @@ main {
     gap: 80px;
 }
 
+/* Grille */
+.grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 60px 20px;
+}
+
 
 /* Éléments génériques 
  -------------------------------- */
@@ -253,13 +260,6 @@ a:hover {
 
 /* Conteneur spécifique : Carte 
  -------------------------------- */
-
-/* Section contenant les cartes */
-.section-cartes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    gap: 60px 20px;
-}
 
 /* Carte */
 .carte {
