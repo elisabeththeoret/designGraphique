@@ -37,7 +37,7 @@
         }
 
         /**
-         * show
+         * page
          * Déclarer les variables qu'on veut accessible dans la page.
          * Afficher la page de la session de l'utilisateur.
          */
@@ -68,7 +68,6 @@
             }
             // client
             else{
-                // rediriger
                 RequirePage::redirectPage("/home/error");
             }
         }
@@ -78,6 +77,7 @@
          * Déclarer les variables qu'on veut accessible dans la page.
          * Afficher la page de détails d'un utilisateur.
          * Seul les utilisateurs 'Admin' et 'Employé.e' peuvent voir les détails d'un utilisateur.
+         * @param { Int } $id - Clé primaire du client à afficher
          */
         public function show($id){
             CheckSession::sessionAuth();
@@ -91,7 +91,6 @@
             }
             // client
             else{
-                // rediriger
                 RequirePage::redirectPage("/home/error");
             }
         }
@@ -113,7 +112,6 @@
             }
             // client
             else{
-                // rediriger
                 RequirePage::redirectPage('/home/error');
             }
         }
@@ -129,7 +127,6 @@
             
             // client
             if($_SESSION['privilege_id'] == 3){
-                // rediriger
                 RequirePage::redirectPage('/home/error');
             }
             
@@ -164,7 +161,7 @@
                 $errors = $validation->displayErrors();
             }
             
-            // réafficher la page create pour corriger les erreurs
+            // réafficher avec erreurs
             $privilege = new ModelPrivilege();
             $selectPrivileges = $privilege->select();
             
@@ -259,7 +256,7 @@
                 $errors = $validation->displayErrors();
             }
             
-            // réafficher la page create pour corriger les erreurs
+            // réafficher avec erreurs
             $privilege = new ModelPrivilege();
             $selectPrivileges = $privilege->select();
             

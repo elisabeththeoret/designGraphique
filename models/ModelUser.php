@@ -1,6 +1,7 @@
 <?php
     // class ModelUser
     class ModelUser extends CRUD{
+
         /**
          * propriétés
          * @protected { String } $table - Nom de la table db
