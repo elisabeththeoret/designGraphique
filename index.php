@@ -33,6 +33,10 @@
                 // récupérer la méthode
                 $method = $url[1];
                 
+                /**
+                 * @source https://www.php.net/manual/fr/function.method-exists.php
+                 * @source https://www.php.net/manual/en/reflectionfunctionabstract.getnumberofrequiredparameters.php
+                 */
                 if(method_exists($controller, $method)){
                     // nombre de paramètres attendus
                     $reflection = new \ReflectionMethod($controller, $method);
