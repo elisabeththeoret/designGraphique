@@ -1,9 +1,12 @@
-{{ include('header.php', {title: 'Modifier Client'}) }}
+{{ include('header.php', { title:'Modifier', nom:client.nom }) }}
+
 <body>
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>Modifier le client</h1>
+        <header class="flex-row">
+            <h1>Modifier {{ client.nom }}</h1>
+        </header>
         
         <!-- Erreurs -->
         {% if errors %}
@@ -27,7 +30,11 @@
                     <label for="ville">Ville</label>
                     <select name="ville_id" id="ville">
                         {% for ville in villes %}
-                        <option value="{{ ville.id }}" {% if ville.id == client.ville_id %} selected {% endif %}>{{ ville.nom }}</option>
+                        <option value="{{ ville.id }}"
+                            {% if ville.id == client.ville_id %} selected
+                            {% endif %}>
+                            {{ ville.nom }}
+                        </option>
                         {% endfor %}
                     </select>
                     
@@ -48,7 +55,7 @@
                     <input type="text" name="phone" id="phone" value="{{ client.phone }}">
                 </fieldset>
             </div>
-                
+            
             <nav class="nav-action">
                 <!-- Annuler -->
                 <a class="bouton annuler" href="{{ path }}/client/show/{{ client.id }}">Annuler</a>
@@ -58,5 +65,7 @@
             </nav>
         </form>
     </main>
+    
+    {{ include('footer.php') }}
 </body>
 </html>

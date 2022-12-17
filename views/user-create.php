@@ -1,9 +1,12 @@
-{{ include('header.php', {title: 'Nouvel utilisateur'}) }}
+{{ include('header.php', { title:'Ajouter un utilisateur' }) }}
+
 <body>
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>Nouvel utilisateur</h1>
+        <header class="flex-row">
+            <h1>Ajouter un utilisateur</h1>
+        </header>
         
         <!-- Erreurs -->
         {% if errors %}
@@ -26,14 +29,12 @@
                     <input type="password" name="password" id="password">
                     
                     {% if session.privilege_id <= 2 %}
-                    <label for="privilege">Privilege</label>
+                    <label for="privilege">Privilege*</label>
                     <select name="privilege_id" id="privilege">
                         {% for privilege in privileges %}
                         <option value="{{ privilege.id }}"
-                            {% if session.privilege_id == 2 and privilege.id == 3 %}
-                            selected
-                            {% elseif session.privilege_id == 2 %}
-                            disabled
+                            {% if session.privilege_id == 2 and privilege.id == 3 %} selected
+                            {% elseif session.privilege_id == 2 %} disabled
                             {% endif %}>
                             {{ privilege.nom }}
                         </option>
@@ -44,10 +45,15 @@
             </div>
             
             <nav class="nav-action">
-                <!-- Envoyer -->
-                <input type="submit" class="bouton" value="Envoyer">
+                <!-- Annuler -->
+                <a class="bouton annuler" href="{{ path }}/user">Annuler</a>
+                
+                <!-- Créer -->
+                <input type="submit" class="bouton" value="Créer">
             </nav>
         </form>
     </main>
+    
+    {{ include('footer.php') }}
 </body>
 </html>

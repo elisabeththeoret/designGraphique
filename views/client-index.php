@@ -1,4 +1,5 @@
-{{ include('header.php', {title: 'Nos clients'}) }}
+{{ include('header.php', { title:'Nos clients' }) }}
+
 <body>
     {{ include('nav-principale.php') }}
     
@@ -47,5 +48,7 @@
             {% endfor %}
         </section>
     </main>
+    
+    {{ include('footer.php') }}
 </body>
 </html>

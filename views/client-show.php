@@ -1,6 +1,12 @@
-{{ include('header.php', {title: 'Client'}) }}
+{{ include('header.php', { nom:client.nom }) }}
+
 <body>
     {{ include('nav-principale.php') }}
+    
+    <!-- Retour -->
+    <nav class="fil-arianne">
+        <a href="{{ path }}/client"><span class="fleche">&#10094;</span> Retour</a>
+    </nav>
     
     <main>
         <header class="flex-row">
@@ -43,5 +49,7 @@
             </article>
         </section>
     </main>
+    
+    {{ include('footer.php') }}
 </body>
 </html>

@@ -8,7 +8,7 @@ html {
     --orange: #ff7f50;
     --white: #ffffff;
     --grey: #4e4e4e;
-    --lightgrey: #858585;
+    --lightgrey: #999999;
     --black: #272727;
     --darker: #202020;
 }
@@ -28,7 +28,9 @@ html {
 
 /* Body */
 body {
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     color: var(--white);
     background-color: var(--black);
 }
@@ -39,7 +41,6 @@ body {
 
 /* Contexte flex */
 main,
-form,
 .flex-col {
     display: flex;
     flex-direction: column;
@@ -84,7 +85,7 @@ h1, h2 {
 
 h1 {
     font-size: 2.25em;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--blue);
 }
 
@@ -102,6 +103,7 @@ small {
 
 /* Paragraphe */
 p {
+    line-height: 1.5625;
     margin-top: 5px;
     margin-bottom: 10px;
 }
@@ -135,169 +137,14 @@ a:hover {
 }
 
 
-/* Conteneur spécifique : Navigation 
- -------------------------------- */
-.accueil {
-    height: 100%;
-    padding: 0px 40px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.accueil>* {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.accueil .nav {
-    flex: 65%;
-}
-
-.accueil .boutons {
-    flex: 35%;
-}
-
-.accueil>*>* {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 75px;
-    max-width: unset;
-    flex: 1;
-    font-size: 2.25rem;
-}
-
-.accueil .nav a {
-    border: 1px solid var(--blue);
-}
-
-.accueil .nav a:hover {
-    border: 1px solid var(--orange);
-}
-
-.accueil .boutons a {
-    font-size: 1.25rem;
-    color: var(--orange);
-    border: 1px solid var(--orange);
-}
-
-.accueil .boutons a:hover {
-    color: var(--white);
-    border-color: var(--white);
-}
-
-.accueil .fleche {
-    position: absolute;
-    color: inherit;
-    margin-left: calc(100% - 200px);
-    opacity: 0;
-    transition: ease-in-out 300ms;
-}
-
-.accueil a:hover .fleche {
-    margin-left: calc(100% - 170px);
-    opacity: 1;
-}
-
-.accueil .nav a:hover .fleche {
-    color: var(--orange);
-}
-
-.accueil .boutons a:hover .fleche {
-    color: var(--white);
-}
-
-
-/* Conteneur spécifique : Navigation 
- -------------------------------- */
-
-.nav-principale,
-.boutons-action {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: var(--darker);
-}
-
-.nav-principale {
-    gap: 40px;
-    padding: 0px 40px;
-}
-
-/* Liens de la navigation */
-.nav-principale a {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    color: var(--white);
-    background-color: inherit;
-    box-sizing: border-box;
-    border-bottom: 2px solid var(--darker);
-}
-
-.nav-principale a:hover {
-    border-color: var(--orange);
-}
-
-/* Sous-conteneur spécifique : Boutons-action */
-.boutons-action {
-    margin-left: auto;
-    gap: 20px;
-}
-
-.boutons-action a {
-    border: none;
-    border-bottom: 2px solid var(--orange);
-}
-
-.boutons-action a:hover {
-    color: var(--blue);
-    border-color: var(--blue);
-}
-
-
-/* Conteneur spécifique : Carte 
- -------------------------------- */
-
-/* Carte */
-.carte {
-    gap: 20px;
-    padding: 30px;
-    border-left: 1px solid var(--grey);
-}
-
-.carte>.flex-row {
-    gap: 20px;
-}
-
-/* Nom de l'entreprise */
-.carte a {
-    font-size: 1.625em;
-}
-
-
-/* Conteneur spécifique : Nav Action 
- -------------------------------- */
-header.flex-row>nav {
-    flex: unset;
-}
-
-
-/* Conteneur spécifique : Nav Action 
- -------------------------------- */
-
-.nav-action {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-
 /* Conteneur spécifique : Form 
  -------------------------------- */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
 
 form>.flex-row {
     flex-wrap: wrap;
@@ -347,6 +194,7 @@ select * {
 textarea {
     height: 200px;
     resize: none;
+    line-height: 1.5625;
 }
 
 /* Bouton */
@@ -372,5 +220,237 @@ input.bouton {
     color: var(--white);
     background-color: var(--blue);
     border-color: var(--blue);
+}
+
+
+/* Conteneur spécifique : Accueil (Page Navigation) 
+ -------------------------------- */
+
+.accueil {
+    min-height: calc(100% - 160px);
+    padding: 80px 80px;
+    justify-content: center;
+    gap: 80px;
+}
+
+.accueil nav,
+.accueil nav>.grille {
+    gap: 20px;
+}
+
+.accueil nav>.grille {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+@media screen and (min-width: 1600px) {
+    .accueil nav>.grille {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Boutons */
+.accueil>nav a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 75px;
+    max-width: unset;
+    flex: 1;
+    font-size: 2.25rem;
+}
+
+/* Gros boutons */
+.accueil .nav a {
+    color: var(--blue);
+    border: 1px solid var(--blue);
+}
+
+/* Moyens boutons */
+.accueil .boutons a {
+    font-size: 1.25rem;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+/* Moyens boutons (de session) */
+.accueil .boutons a.session {
+    padding: 50px 75px;
+    color: var(--lightgrey);
+    border-color: var(--lightgrey);
+}
+
+/* Flèches dans les boutons */
+.accueil .fleche {
+    position: absolute;
+    color: inherit;
+    margin-left: calc(100% - 200px);
+    opacity: 0;
+    transition: ease-in-out 300ms;
+}
+
+.accueil a:hover .fleche {
+    margin-left: calc(100% - 170px);
+    opacity: 1;
+}
+
+
+/* Conteneur spécifique : Navigations principale et secondaire
+ -------------------------------- */
+
+.nav-principale,
+.nav-principale .action {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: var(--darker);
+}
+
+.nav-principale {
+    gap: 40px;
+    padding: 0px 40px;
+}
+
+/* Liens de la navigation */
+.nav-principale a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    background-color: inherit;
+    border-bottom: 2px solid var(--darker);
+    box-sizing: border-box;
+}
+
+.nav-principale a:hover {
+    border-color: var(--orange);
+}
+
+/* Sous-conteneur spécifique : Action */
+.action {
+    margin-left: auto;
+    gap: 20px;
+}
+
+.action a:not(.bouton-action) {
+    color: var(--lightgrey);
+    border-bottom: 0.5px solid var(--lightgrey);
+    padding-bottom: 1.5px;
+}
+
+.action a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.action .bouton-action {
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-color: var(--orange);
+}
+
+.action .bouton-action:hover {
+    color: var(--white);
+    border-color: var(--white);
+}
+
+
+/* Conteneur spécifique : Carte 
+ -------------------------------- */
+
+.fil-arianne {
+    padding: 10px 40px;
+}
+
+
+/* Conteneur spécifique : Entête principale 
+ -------------------------------- */
+
+main>header.flex-row {
+    gap: 40px;
+}
+
+/* largeur non définie */
+main>header.flex-row>nav {
+    flex: unset;
+}
+
+
+/* Conteneur spécifique : Carte 
+ -------------------------------- */
+
+/* Carte */
+.carte {
+    gap: 20px;
+    padding: 30px;
+    border-left: 1px solid var(--grey);
+}
+
+.carte>.flex-row {
+    gap: 20px;
+}
+
+/* Nom de l'entreprise */
+.carte a {
+    font-size: 1.625em;
+}
+
+
+/* Conteneur spécifique : Nav Action 
+ -------------------------------- */
+
+.nav-action {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+
+/* Conteneur spécifique : Nav Action 
+ -------------------------------- */
+
+form .flex-row:has(>.aide) {
+    justify-content: space-between;
+}
+
+form .flex-row:has(>.aide)>* {
+    flex: unset;
+}
+
+form .flex-row>.aide {
+    align-items: center;
+    gap: 20px;
+}
+
+form .flex-row>.aide>* {
+    flex: unset;
+}
+
+
+/* Conteneur spécifique : Nav Liens 
+ -------------------------------- */
+
+.nav-liens {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Liens avec flèche */
+a.lien-fleche {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+}
+
+
+/* Conteneur spécifique : Nav Liens 
+ -------------------------------- */
+
+footer {
+    margin-top: auto;
+    font-size: .75em;
+    padding: 20px 40px;
+    color: var(--grey);
+    background-color: var(--darker);
 }
 

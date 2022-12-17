@@ -1,9 +1,17 @@
-{{ include('header.php', {title: 'Modifier Projet'}) }}
+{{ include('header.php', { title:'Modifier un projet' }) }}
+
 <body>
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>Modifier le projet</h1>
+        <header class="flex-row">
+            <h1>Modifier le projet</h1>
+        </header>
+        
+        <!-- Erreurs -->
+        {% if errors %}
+        <span class="errors">{{ errors | raw }}</span>
+        {% endif %}
         
         <!-- Form Modifier -->
         <form action="{{ path }}/projet/update" method="post">
@@ -29,12 +37,12 @@
                         <option value="{{ categorie.id }}" {% if categorie.id == projet.categorie_id %} selected {% endif %}>{{ categorie.nom }}</option>
                         {% endfor %}
                     </select>
-
+                    
                     <label for="description">Description</label>
                     <textarea name="description" id="description">{{ projet.description }}</textarea>
                 </fieldset>
             </div>
-                
+            
             <nav class="nav-action">
                 <!-- Annuler -->
                 <a class="bouton annuler" href="{{ path }}/projet/show/{{ projet.id }}">Annuler</a>
@@ -44,5 +52,7 @@
             </nav>
         </form>
     </main>
+    
+    {{ include('footer.php') }}
 </body>
 </html>

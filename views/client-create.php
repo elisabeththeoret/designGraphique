@@ -1,9 +1,12 @@
-{{ include('header.php', {title: 'Nouveau client'}) }}
+{{ include('header.php', { title:'Ajouter un client' }) }}
+
 <body>
     {{ include('nav-principale.php') }}
     
     <main>
-        <h1>Nouveau client</h1>
+        <header class="flex-row">
+            <h1>Ajouter un client</h1>
+        </header>
         
         <!-- Erreurs -->
         {% if errors %}
@@ -51,10 +54,12 @@
                 <!-- Annuler -->
                 <a class="bouton annuler" href="{{ path }}/client">Annuler</a>
                 
-                <!-- Envoyer -->
-                <input type="submit" class="bouton" value="Envoyer">
+                <!-- Créer -->
+                <input type="submit" class="bouton" value="Créer">
             </nav>
         </form>
     </main>
+    
+    {{ include('footer.php') }}
 </body>
 </html>
