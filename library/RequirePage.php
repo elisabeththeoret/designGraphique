@@ -17,8 +17,8 @@
          * @param { String } $page - Nom de la page
          */
         static public function redirectPage($page){
-            // return header("Location: http://localhost/582-31B_prog_web_avancee/designGraphique$page");   // maison
-            return header("Location: http://localhost:7080/e2196008/designGraphique$page");   // ecole
+            return header("Location: http://localhost/582-31B_prog_web_avancee/designGraphique$page");   // maison
+            // return header("Location: http://localhost:7080/e2196008/designGraphique$page");   // ecole
         }
 
     }

@@ -7,8 +7,8 @@
          * Construire la connexion avec la base de données
          */
         public function __construct(){
-            // parent::__construct("mysql:host=localhost; dbname=designGraphique; port=3306; charset=utf8;", 'root', 'root');   // maison
-            parent::__construct("mysql:host=localhost; dbname=designGraphique; port=3306; charset=utf8;", 'root', '');       // ecole
+            parent::__construct("mysql:host=localhost; dbname=designGraphique; port=3306; charset=utf8;", 'root', 'root');   // maison
+            // parent::__construct("mysql:host=localhost; dbname=designGraphique; port=3306; charset=utf8;", 'root', '');       // ecole
         }
 
         /**
