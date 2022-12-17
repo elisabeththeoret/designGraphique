@@ -34,14 +34,25 @@
                 $method = $url[1];
                 
                 if(method_exists($controller, $method)){
-                    if(isset($url[2])){
-                        // afficher la page avec sa valeur
-                        $value = $url[2];
-                        echo $controller->$method($value);
-                    }
-                    else{
+                    // nombre de paramètres attendus
+                    $reflection = new \ReflectionMethod($controller, $method);
+                    $args = $reflection->getNumberOfRequiredParameters();
+                    
+                    if($args == 0){
                         // afficher la page
                         echo $controller->$method();
+                    } else{
+                        if(isset($url[2])){
+                            // afficher la page avec sa valeur
+                            $value = $url[2];
+                            echo $controller->$method($value);
+                        }
+                        else{
+                            // page d'erreur (home-error)
+                            require_once('controllers/ControllerHome.php');
+                            $controller = new ControllerHome();
+                            echo $controller->error();
+                        }
                     }
                 }
                 else{
