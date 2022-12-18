@@ -12,6 +12,7 @@
     {% else %}
     <aside class="action">
         {% if session and session.privilege_id <= 2 %}
+        <a href="{{ path }}/image">Galerie</a>
         <a href="{{ path }}/client">Clients</a>
         <a href="{{ path }}/facture">Factures</a>
         <a href="{{ path }}/user">Utilisateurs</a>

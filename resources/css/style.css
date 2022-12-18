@@ -74,6 +74,11 @@ main {
     gap: 60px 20px;
 }
 
+img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
 
 /* Éléments génériques 
  -------------------------------- */
