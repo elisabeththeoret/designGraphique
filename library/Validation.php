@@ -24,10 +24,13 @@
             'int'           => '[0-9]+',
             'float'         => '[0-9\.,]+',
             'tel'           => '[0-9+\s()-]+',
-            'text'          => '[\p{L}0-9\s-.,;:!"%&()?+\'°#\/@]+',
+            'nom'           => '[\p{L}\s\-]+',
+            'nom_entreprise'=> '[\p{L}\s\-.,&]+',
+            'text'          => '[\p{L}0-9\s\-.,;:\!\"%&()?*+\'°#\/@\[\]]+',
+            'password'      => '[\p{L}0-9\-_.,;:\!$%&()?*+=#@]+',
             'file'          => '[\p{L}\s0-9-_!%&()=\[\]#@,.;+]+\.[A-Za-z0-9]{2,4}',
             'folder'        => '[\p{L}\s0-9-_!%&()=\[\]#@,.;+]+',
-            'address'       => '[\p{L}0-9\s.,()°-]+',
+            'address'       => '[\p{L}0-9\s.,()#\-]+',
             'date_dmy'      => '[0-9]{1,2}\-[0-9]{1,2}\-[0-9]{4}',
             'date_ymd'      => '[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}',
             'email'         => '[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})'
@@ -107,7 +110,13 @@
          */
         public function required(){
             if((isset($this->file) && $this->file['error'] == 4) || ($this->value == '' || $this->value == null)){
-                $this->errors[] = 'Le champ '.$this->name.' est obligatoire.';
+                if(strrchr($this->name, '_id')){
+                    $nom = $this->name;
+                    $nom = rtrim($nom, "_id");
+                    $this->errors[] = 'Le champ '.$nom.' est obligatoire.';
+                } else{
+                    $this->errors[] = 'Le champ '.$this->name.' est obligatoire.';
+                }
             }
             return $this;
         }

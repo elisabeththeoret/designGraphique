@@ -57,7 +57,7 @@
                 <article>
                     <h2>Consulter</h2>
                     <nav class="nav-liens">
-                        <a href="{{ path }}/projet/show/1" class="lien-fleche">Voir la liste de mes projets <span class="fleche">&#10095;</span></a>
+                        <a href="{{ path }}/projet" class="lien-fleche">Voir la liste de mes projets <span class="fleche">&#10095;</span></a>
                         <a href="{{ path }}/facture/show/1" class="lien-fleche">Voir la liste de mes factures <span class="fleche">&#10095;</span></a>
                     </nav>
                 </article>

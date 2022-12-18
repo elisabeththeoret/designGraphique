@@ -131,11 +131,11 @@
             }
             
             // valider
-            $validation = new Validation();
             extract($_POST);
-            $validation->name('nom')->value($nom)->customPattern('[\p{L}\s-]+')->required()->max(45);
+            $validation = new Validation();
+            $validation->name('nom')->value($nom)->pattern('nom')->required()->max(40);
             $validation->name('username')->value($username)->pattern('email')->required()->max(50);
-            $validation->name('password')->value($password)->required()->max(20)->min(6);
+            $validation->name('password')->value($password)->pattern('password')->required()->max(20)->min(6);
             $validation->name('privilege_id')->value($privilege_id)->pattern('int')->required();
             
             // vérifier
@@ -208,11 +208,13 @@
             // valider
             $validation = new Validation();
             extract($_POST);
-            $validation->name('nom')->value($nom)->customPattern('[\p{L}\s-]+')->required()->max(45);
+            $validation->name('nom')->value($nom)->pattern('nom')->required()->max(40);
             $validation->name('username_new')->value($username_new)->pattern('email')->required()->max(50);
-            $validation->name('privilege_id')->value($privilege_id)->pattern('int')->required();
+            if(isset($_POST['privilege_id'])){
+                $validation->name('privilege_id')->value($privilege_id)->pattern('int')->required();
+            }
             if(isset($_POST['password'])){
-                $validation->name('password')->value($password)->required()->max(20)->min(6);
+                $validation->name('password')->value($password)->pattern('password')->required()->max(20)->min(6);
             }
             
             // vérifier
@@ -243,6 +245,10 @@
                     }
                     // admin et employé.e
                     else{
+                        $_POST['username'] = $username_new;
+                        unset($_POST['username_new']);
+                        $update = $user->update($_POST);
+                        
                         requirePage::redirectPage('/user/show/'.$_POST['id']);
                     }
                 }
@@ -272,14 +278,20 @@
         public function delete(){
             CheckSession::sessionAuth();
             
+            if($_SESSION['user_id'] == $_POST['id']){
+                $user = new ModelUser();
+                $delete = $user->delete($_POST['id']);
+                
+                requirePage::redirectPage('/user/logout');
+            }
             // admin
-            if($_SESSION['privilege_id'] == 1){
+            else if($_SESSION['privilege_id'] == 1){
                 $user = new ModelUser();
                 $delete = $user->delete($_POST['id']);
                 
                 requirePage::redirectPage('/user');
             }
-            // employé.e et client
+            // autre employé.e et client
             else{
                 RequirePage::redirectPage('/home/error');
             }

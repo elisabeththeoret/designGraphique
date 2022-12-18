@@ -27,7 +27,7 @@
                     <label for="username_new">Username</label>
                     <input type="email" name="username_new" id="username_new" value="{{ user.username_new }}">
                     
-                    {% if session.privilege_id <= 2 %}
+                    {% if session.privilege_id <= 2 and session.user_id != user.id %}
                     <label for="privilege">Privilege</label>
                     <select name="privilege_id" id="privilege">
                         {% for privilege in privileges %}
@@ -39,9 +39,6 @@
                         </option>
                         {% endfor %}
                     </select>
-                    
-                    {% else %}
-                    <input type="hidden" name="privilege_id" value="3">
                     {% endif %}
                     
                     {% if session.user_id == user.id %}
@@ -55,7 +52,11 @@
             
             <nav class="nav-action">
                 <!-- Annuler -->
+                {% if session.user_id == user.id %}
+                <a class="bouton annuler" href="{{ path }}/user/page">Annuler</a>
+                {% else %}
                 <a class="bouton annuler" href="{{ path }}/user/show/{{ user.id }}">Annuler</a>
+                {% endif %}
                 
                 <!-- Enregistrer -->
                 <input type="submit" class="bouton" value="Enregistrer">

@@ -91,12 +91,12 @@
             // valider
             $validation = new Validation();
             extract($_POST);
-            $validation->name('nom')->value($nom)->customPattern('[\p{L}\s-]+')->required()->max(40);
-            $validation->name('adresse')->value($adresse)->max(50)->customPattern('[\p{L}0-9\s.,()-#]+');
-            $validation->name('codePostal')->value($codePostal)->max(10)->pattern('alphanum');
-            $validation->name('contact')->value($contact)->customPattern('[\p{L}\s-]+')->required()->max(30);
+            $validation->name('nom')->value($nom)->pattern('nom_entreprise')->required()->max(40);
+            $validation->name('adresse')->value($adresse)->pattern('address')->max(50);
+            $validation->name('codePostal')->value($codePostal)->pattern('alphanum')->max(10);
+            $validation->name('contact')->value($contact)->pattern('nom')->required()->max(30);
             $validation->name('courriel')->value($courriel)->pattern('email')->required()->max(50);
-            $validation->name('phone')->value($phone)->max(20)->pattern('tel');
+            $validation->name('phone')->value($phone)->pattern('tel')->max(20);
             $validation->name('ville_id')->value($ville_id)->pattern('int');
             
             // vérifier
@@ -161,12 +161,12 @@
             // valider
             $validation = new Validation();
             extract($_POST);
-            $validation->name('nom')->value($nom)->customPattern('[\p{L}\s-]+')->required()->max(40);
-            $validation->name('adresse')->value($adresse)->max(50)->customPattern('[\p{L}0-9\s.,()-]+');
-            $validation->name('codePostal')->value($codePostal)->max(10)->pattern('alphanum');
-            $validation->name('contact')->value($contact)->customPattern('[\p{L}\s-]+')->required()->max(30);
+            $validation->name('nom')->value($nom)->pattern('nom_entreprise')->required()->max(40);
+            $validation->name('adresse')->value($adresse)->pattern('address')->max(50);
+            $validation->name('codePostal')->value($codePostal)->pattern('alphanum')->max(10);
+            $validation->name('contact')->value($contact)->pattern('nom')->required()->max(30);
             $validation->name('courriel')->value($courriel)->pattern('email')->required()->max(50);
-            $validation->name('phone')->value($phone)->max(20)->pattern('tel');
+            $validation->name('phone')->value($phone)->pattern('tel')->max(20);
             $validation->name('ville_id')->value($ville_id)->pattern('int');
             
             // vérifier

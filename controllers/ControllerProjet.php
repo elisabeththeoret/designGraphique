@@ -74,7 +74,7 @@
             // valider
             $validation = new Validation();
             extract($_POST);
-            $validation->name('titre')->value($titre)->customPattern('text')->required()->max(40);
+            $validation->name('titre')->value($titre)->pattern('text')->required()->max(40);
             $validation->name('description')->value($description)->pattern('text');
             $validation->name('client_id')->value($client_id)->pattern('int')->required();
             $validation->name('categorie_id')->value($categorie_id)->pattern('int')->required();
@@ -137,7 +137,7 @@
             // valider
             $validation = new Validation();
             extract($_POST);
-            $validation->name('titre')->value($titre)->customPattern('text')->required()->max(40);
+            $validation->name('titre')->value($titre)->pattern('text')->required()->max(40);
             $validation->name('description')->value($description)->pattern('text');
             $validation->name('client_id')->value($client_id)->pattern('int')->required();
             $validation->name('categorie_id')->value($categorie_id)->pattern('int')->required();
@@ -160,7 +160,7 @@
             $categorie = new ModelCategorie();
             $selectCategories = $categorie->select();
             
-            twig::render('projet-create.php', ['errors' => $errors, 'projet' => $_POST, 'clients' => $selectClients, 'categories' => $selectCategories]);
+            twig::render('projet-edit.php', ['errors' => $errors, 'projet' => $_POST, 'clients' => $selectClients, 'categories' => $selectCategories]);
         }
 
     }
